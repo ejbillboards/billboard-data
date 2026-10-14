@@ -1,7 +1,7 @@
-/* E&J Billboard Master Planner loader. Paste once in Squarespace Footer (wrapped in <script>). Data lives in GitHub, not here. */
+/* E&J Billboard Master Planner loader. Squarespace Footer sets window.EJ_MAPBOX_TOKEN then loads this file. */
 (function(){
 var m0=location.pathname.match(/^\/([a-z-]+-digital-billboards)\/p\/([^\/?#]+)/);if(!m0)return;
-var BASE="https://ejbillboards.github.io/billboard-data/",TOKEN="MAPBOX_PUBLIC_TOKEN",done=0,C,D;
+var BASE="https://ejbillboards.github.io/billboard-data/",TOKEN=window.EJ_MAPBOX_TOKEN,done=0,C,D;
 function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
 function money(n){return "$"+Number(n).toLocaleString("en-US")}
 function lines(g){return ["$400+ · 4 days, 6 hrs/day","$750+ · Business Package: 3 days/wk for a month",(g.rate?money(g.rate):"$2,000")+"+ · Full month campaign"]}
