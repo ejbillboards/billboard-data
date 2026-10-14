@@ -27,6 +27,16 @@ function place(){
  return true}
 function tick(){if(place())return;var n=0,t=setInterval(function(){if(place()||++n>40)clearInterval(t)},250)}
 function go(){if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",tick);else tick()}
+function ejCard(){
+ if(!document.getElementById("ej-card-css")){var st=document.createElement("style");st.id="ej-card-css";st.textContent=".ej-upload-card{background:#0b0b0b;color:#fff;border:1px solid #c9a43f;border-radius:20px;padding:26px 22px;margin:28px 0;text-align:center;box-shadow:0 8px 24px rgba(0,0,0,.18)}.ej-upload-card,.ej-upload-card *{color:#fff}.ej-upload-card h2,.ej-upload-card h3{margin:0 0 10px;padding:0;border:0;color:#fff}.ej-upload-card h2:before,.ej-upload-card h3:before{display:none}.ej-upload-card p{margin:0 0 10px}.ej-step{display:inline-block;background:linear-gradient(135deg,#e3c872,#c9a43f);color:#111!important;font-weight:700;letter-spacing:.12em;font-size:12px;padding:6px 14px;border-radius:999px;margin-bottom:12px}.ej-upload-card a.ej-btn{display:inline-block;background:linear-gradient(135deg,#e3c872,#c9a43f);color:#111!important;font-weight:700;padding:14px 22px;border-radius:14px;text-decoration:none;margin:10px 0}.ej-upload-card a.ej-btn *{color:#111!important}";document.head.appendChild(st)}
+ [].forEach.call(document.querySelectorAll(".product-description h2,.product-description h3"),function(h){
+  if(h.__ej||!/^\s*Upload Your Billboard Content/i.test(h.textContent))return;h.__ej=1;
+  var box=document.createElement("div");box.className="ej-upload-card";var sibs=[],e=h.nextElementSibling;
+  while(e&&!/^H[1-6]$/.test(e.tagName)){sibs.push(e);e=e.nextElementSibling}
+  h.parentNode.insertBefore(box,h);var pill=document.createElement("div");pill.className="ej-step";pill.textContent="STEP 2";
+  box.appendChild(pill);box.appendChild(h);sibs.forEach(function(x){box.appendChild(x)});
+  [].forEach.call(box.querySelectorAll("a"),function(a){a.classList.add("ej-btn")})})}
+(function(){var n=0;function t(){try{ejCard()}catch(e){}if(++n<40)setTimeout(t,300)}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",t);else t()})();
 function j(u){return fetch(u).then(function(r){if(!r.ok)throw 0;return r.json()})}
 j(BASE+"pages.json").then(function(P){
  var st=P.states[m0[1]];if(!st)return;
