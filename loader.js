@@ -20,7 +20,7 @@ function place(){
  w.innerHTML='<h2 style="margin:0 0 6px">Billboards near '+esc(C[0])+' on the map</h2><p style="margin:0 0 10px;opacity:.8">Tap a pin for photos, size, and starting prices. Pins are approximate. An agent confirms the exact face and availability.</p><div id="ej-map" style="height:420px;border-radius:12px;overflow:hidden;background:#e8ecef"></div><details style="margin:12px 0 0"><summary style="cursor:pointer;font-weight:600;padding:10px 0">See all '+D.length+' billboard locations</summary><ul style="margin:8px 0 0;padding-left:18px;font-size:14px;max-height:360px;overflow:auto">'+D.map(function(g){return "<li>"+esc(title(g))+" — "+esc(g.loc)+" — from "+(g.rate?money(g.rate):"$400")+"+</li>"}).join("")+"</ul></details>";
  anchor.parentNode.insertBefore(w,anchor.nextSibling);
  load(function(){try{if(!mapboxgl.supported())throw 0;mapboxgl.accessToken=TOKEN;
-  var m=new mapboxgl.Map({container:"ej-map",style:"mapbox://styles/mapbox/light-v11",center:[C[2],C[1]],zoom:C[3]});
+  var m=new mapboxgl.Map({container:"ej-map",style:"mapbox://styles/mapbox/light-v11",center:[C[2],C[1]],zoom:C[3],cooperativeGestures:true});
   m.addControl(new mapboxgl.NavigationControl());
   D.forEach(function(g){new mapboxgl.Marker({color:"#c9971c"}).setLngLat([g.lon,g.lat]).setPopup(new mapboxgl.Popup({offset:24,maxWidth:"260px"}).setHTML(pop(g))).addTo(m)});
  }catch(e){document.getElementById("ej-map").innerHTML='<p style="padding:20px">The map could not load. See the list below or call 888-999-3241.</p>'}});
