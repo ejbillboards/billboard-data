@@ -1,6 +1,6 @@
 /* E&J Billboard Master Planner loader. Squarespace Footer sets window.EJ_MAPBOX_TOKEN then loads this file. */
 (function(){
-var m0=location.pathname.match(/^\/([a-z-]+-digital-billboards)\/p\/([^\/?#]+)/),isP=/^\/[^\/]+\/p\/[^\/?#]+/.test(location.pathname);if(!isP)return;
+var m0=location.pathname.match(/^\/([a-z-]+-digital-billboards)\/p\/([^\/?#]+)/);
 var BASE="https://ejbillboards.github.io/billboard-data/",TOKEN=window.EJ_MAPBOX_TOKEN,done=0,C,D;
 function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
 function money(n){return "$"+Number(n).toLocaleString("en-US")}
@@ -27,7 +27,7 @@ function place(){
  return true}
 function tick(){if(place())return;var n=0,t=setInterval(function(){if(place()||++n>40)clearInterval(t)},250)}
 function go(){if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",tick);else tick()}
-function ejCard(){
+function ejCss(){
  if(!document.getElementById("ej-card-css")){var st=document.createElement("style");st.id="ej-card-css";st.textContent=
  ".ej-sec:not(#ej-master-planner),.ej-sec:not(#ej-master-planner) *{opacity:1!important;visibility:visible!important;transform:none!important;animation:none!important}#ej-master-planner,#ej-master-planner>*{opacity:1!important;visibility:visible!important}.ej-sec ol>li:before{transform:translateY(-50%)!important}.ej-sec{background:linear-gradient(180deg,#fff,#faf5e6);border:1px solid #e8d9a8;border-radius:26px;padding:26px 22px;margin:20px 0;box-shadow:0 10px 30px rgba(0,0,0,.06)}"+
  ".ej-sec>h2,.ej-sec>h3.ej-h{margin:0 0 14px;padding:0;border:0;text-align:center}.ej-sec>h2:before{display:none}"+
@@ -40,7 +40,8 @@ function ejCard(){
  ".ej-sec.ej-dark{background:#0b0b0b;border-color:#c9a43f;text-align:center;box-shadow:0 8px 24px rgba(0,0,0,.18)}.ej-dark,.ej-dark *{color:#fff}.ej-dark>h2{color:#fff}"+
  ".ej-step{display:inline-block;background:linear-gradient(135deg,#e3c872,#c9a43f);color:#111!important;font-weight:700;letter-spacing:.12em;font-size:12px;padding:6px 14px;border-radius:999px;margin-bottom:12px}"+
  ".ej-dark a.ej-btn{display:inline-block;background:linear-gradient(135deg,#e3c872,#c9a43f);color:#111!important;font-weight:700;padding:14px 22px;border-radius:14px;text-decoration:none;margin:10px 0}.ej-dark a.ej-btn *{color:#111!important}";
- document.head.appendChild(st)}
+ document.head.appendChild(st)}}
+function ejCard(){ejCss();
  [].forEach.call(document.querySelectorAll(".product-description h2"),function(h){
   if(h.__ej||h.closest(".ej-sec"))return;h.__ej=1;
   var up=/^\s*Upload Your Billboard Content/i.test(h.textContent),box=document.createElement("div");box.className="ej-sec"+(up?" ej-dark ej-upload-card":"");
@@ -49,7 +50,14 @@ function ejCard(){
   if(up){var pill=document.createElement("div");pill.className="ej-step";pill.textContent="STEP 2";box.appendChild(pill)}
   box.appendChild(h);sibs.forEach(function(x){box.appendChild(x)});
   if(up)[].forEach.call(box.querySelectorAll("a"),function(a){a.classList.add("ej-btn")})})}
-(function(){var n=0;function t(){try{ejCard()}catch(e){}if(++n<40)setTimeout(t,300)}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",t);else t()})();
+(function(){var n=0;function t(){try{ejCard()}catch(e){}try{ejState()}catch(e){}if(++n<40)setTimeout(t,300)}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",t);else t()})();
+function ejState(){
+ [].forEach.call(document.querySelectorAll('[id^="ej-"][id$="-seo"]'),function(c){
+  if(c.__ejs||!c.querySelector("h2"))return;c.__ejs=1;ejCss();
+  var kids=[].slice.call(c.children),cur=null,pre=[];
+  function mk(){var b=document.createElement("div");b.className="ej-sec";return b}
+  var first=null;kids.forEach(function(k){if(k.tagName==="H2"){cur=mk();c.insertBefore(cur,k);cur.appendChild(k)}else if(k.tagName==="STYLE"||k.tagName==="SCRIPT"){}else if(cur){cur.appendChild(k)}else{pre.push(k)}});
+  if(pre.length){var b=mk();c.insertBefore(b,pre[0]);pre.forEach(function(k){b.appendChild(k)})}})}
 function j(u){return fetch(u).then(function(r){if(!r.ok)throw 0;return r.json()})}
 if(m0)j(BASE+"pages.json").then(function(P){
  var st=P.states[m0[1]];if(!st)return;
