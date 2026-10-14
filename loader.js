@@ -36,7 +36,7 @@ function ejCard(){
   h.parentNode.insertBefore(box,h);var pill=document.createElement("div");pill.className="ej-step";pill.textContent="STEP 2";
   box.appendChild(pill);box.appendChild(h);sibs.forEach(function(x){box.appendChild(x)});
   [].forEach.call(box.querySelectorAll("a"),function(a){a.classList.add("ej-btn")})})}
-(function(){var n=0;function t(){try{ejCard()}catch(e){}if(++n<40)setTimeout(t,300)}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",t);else t()})();
+(function(){var n=0;function t(){try{ejCard()}catch(e){document.title="ejERR "+e.message}if(/ejdbg/.test(location.search)){var hs=[].slice.call(document.querySelectorAll("h1,h2,h3,h4")).filter(function(h){return /Upload Your/i.test(h.textContent)});document.title="ejdbg n="+n+" h="+hs.map(function(h){return h.tagName+"@"+(h.closest(".product-description")?"pd":"nopd")+"/"+(h.parentElement.className||"").slice(0,30)+"/"+(h.closest(".ej-upload-card")?"card":"")}).join(";")}if(++n<40)setTimeout(t,300)}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",t);else t()})();
 function j(u){return fetch(u).then(function(r){if(!r.ok)throw 0;return r.json()})}
 j(BASE+"pages.json").then(function(P){
  var st=P.states[m0[1]];if(!st)return;
