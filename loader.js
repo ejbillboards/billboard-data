@@ -16,9 +16,9 @@ function place(){
  var h=hs[0],anchor=h.nextElementSibling;while(anchor&&anchor.tagName!=="OL"&&anchor.tagName!=="UL")anchor=anchor.nextElementSibling;
  if(!anchor)anchor=h;
  done=1;
- var w=document.createElement("section");w.id="ej-master-planner";w.style.cssText="margin:24px 0";
+ var w=document.createElement("section");w.id="ej-master-planner";w.className="ej-sec";
  w.innerHTML='<h2 style="margin:0 0 6px">Billboards near '+esc(C[0])+' on the map</h2><p style="margin:0 0 10px;opacity:.8">Tap a pin for photos, size, and starting prices. Pins are approximate. An agent confirms the exact face and availability.</p><div id="ej-map" style="height:420px;border-radius:12px;overflow:hidden;background:#e8ecef"></div><details style="margin:12px 0 0"><summary style="cursor:pointer;font-weight:600;padding:10px 0">See all '+D.length+' billboard locations</summary><ul style="margin:8px 0 0;padding-left:18px;font-size:14px;max-height:360px;overflow:auto">'+D.map(function(g){return "<li>"+esc(title(g))+" — "+esc(g.loc)+" — from "+(g.rate?money(g.rate):"$400")+"+</li>"}).join("")+"</ul></details>";
- anchor.parentNode.insertBefore(w,anchor.nextSibling);
+ var ref=anchor.closest(".ej-sec")||anchor;ref.parentNode.insertBefore(w,ref.nextSibling);try{ejCard()}catch(e){}
  load(function(){try{if(!mapboxgl.supported())throw 0;mapboxgl.accessToken=TOKEN;
   var m=new mapboxgl.Map({container:"ej-map",style:"mapbox://styles/mapbox/light-v11",center:[C[2],C[1]],zoom:C[3],cooperativeGestures:true});
   m.addControl(new mapboxgl.NavigationControl());
@@ -28,14 +28,27 @@ function place(){
 function tick(){if(place())return;var n=0,t=setInterval(function(){if(place()||++n>40)clearInterval(t)},250)}
 function go(){if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",tick);else tick()}
 function ejCard(){
- if(!document.getElementById("ej-card-css")){var st=document.createElement("style");st.id="ej-card-css";st.textContent=".ej-upload-card{background:#0b0b0b;color:#fff;border:1px solid #c9a43f;border-radius:20px;padding:26px 22px;margin:28px 0;text-align:center;box-shadow:0 8px 24px rgba(0,0,0,.18)}.ej-upload-card,.ej-upload-card *{color:#fff}.ej-upload-card h2,.ej-upload-card h3{margin:0 0 10px;padding:0;border:0;color:#fff}.ej-upload-card h2:before,.ej-upload-card h3:before{display:none}.ej-upload-card p{margin:0 0 10px}.ej-step{display:inline-block;background:linear-gradient(135deg,#e3c872,#c9a43f);color:#111!important;font-weight:700;letter-spacing:.12em;font-size:12px;padding:6px 14px;border-radius:999px;margin-bottom:12px}.ej-upload-card a.ej-btn{display:inline-block;background:linear-gradient(135deg,#e3c872,#c9a43f);color:#111!important;font-weight:700;padding:14px 22px;border-radius:14px;text-decoration:none;margin:10px 0}.ej-upload-card a.ej-btn *{color:#111!important}";document.head.appendChild(st)}
- [].forEach.call(document.querySelectorAll(".product-description h2,.product-description h3"),function(h){
-  if(h.__ej||!/^\s*Upload Your Billboard Content/i.test(h.textContent))return;h.__ej=1;
-  var box=document.createElement("div");box.className="ej-upload-card";var sibs=[],e=h.nextElementSibling;
-  while(e&&!/^H[1-6]$/.test(e.tagName)){sibs.push(e);e=e.nextElementSibling}
-  h.parentNode.insertBefore(box,h);var pill=document.createElement("div");pill.className="ej-step";pill.textContent="STEP 2";
-  box.appendChild(pill);box.appendChild(h);sibs.forEach(function(x){box.appendChild(x)});
-  [].forEach.call(box.querySelectorAll("a"),function(a){a.classList.add("ej-btn")})})}
+ if(!document.getElementById("ej-card-css")){var st=document.createElement("style");st.id="ej-card-css";st.textContent=
+ ".ej-sec{background:linear-gradient(180deg,#fff,#faf5e6);border:1px solid #e8d9a8;border-radius:26px;padding:26px 22px;margin:20px 0;box-shadow:0 10px 30px rgba(0,0,0,.06)}"+
+ ".ej-sec>h2,.ej-sec>h3.ej-h{margin:0 0 14px;padding:0;border:0;text-align:center}.ej-sec>h2:before{display:none}"+
+ ".ej-sec p{margin:0 0 12px}.ej-sec ul,.ej-sec ol{list-style:none;margin:0;padding:0}"+
+ ".ej-sec li{background:#fff;border:1px solid #eadfba;border-radius:16px;padding:12px 16px;margin:8px 0}"+
+ ".ej-sec ol{counter-reset:ejs}.ej-sec ol>li{counter-increment:ejs;position:relative;padding-left:56px}"+
+ ".ej-sec ol>li:before{content:counter(ejs);position:absolute;left:14px;top:50%;transform:translateY(-50%);width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#e3c872,#c9a43f);color:#111;font-weight:700;text-align:center;line-height:28px;font-size:14px}"+
+ ".ej-sec h3{margin:18px 0 6px;padding-top:14px;border-top:1px solid #eadfba;font-size:1.05em}.ej-sec h3:first-of-type{border-top:0;padding-top:0}"+
+ "#ej-master-planner.ej-sec .ej-pop li{background:none;border:0;padding:0;margin:4px 0}#ej-master-planner.ej-sec ul{list-style:disc;padding-left:18px}#ej-master-planner.ej-sec li{background:none;border:0;border-radius:0;padding:0;margin:4px 0}"+
+ ".ej-sec.ej-dark{background:#0b0b0b;border-color:#c9a43f;text-align:center;box-shadow:0 8px 24px rgba(0,0,0,.18)}.ej-dark,.ej-dark *{color:#fff}.ej-dark>h2{color:#fff}"+
+ ".ej-step{display:inline-block;background:linear-gradient(135deg,#e3c872,#c9a43f);color:#111!important;font-weight:700;letter-spacing:.12em;font-size:12px;padding:6px 14px;border-radius:999px;margin-bottom:12px}"+
+ ".ej-dark a.ej-btn{display:inline-block;background:linear-gradient(135deg,#e3c872,#c9a43f);color:#111!important;font-weight:700;padding:14px 22px;border-radius:14px;text-decoration:none;margin:10px 0}.ej-dark a.ej-btn *{color:#111!important}";
+ document.head.appendChild(st)}
+ [].forEach.call(document.querySelectorAll(".product-description h2"),function(h){
+  if(h.__ej||h.closest(".ej-sec"))return;h.__ej=1;
+  var up=/^\s*Upload Your Billboard Content/i.test(h.textContent),box=document.createElement("div");box.className="ej-sec"+(up?" ej-dark ej-upload-card":"");
+  var sibs=[],e=h.nextElementSibling;while(e&&e.tagName!=="H2"&&e.id!=="ej-master-planner"){sibs.push(e);e=e.nextElementSibling}
+  h.parentNode.insertBefore(box,h);
+  if(up){var pill=document.createElement("div");pill.className="ej-step";pill.textContent="STEP 2";box.appendChild(pill)}
+  box.appendChild(h);sibs.forEach(function(x){box.appendChild(x)});
+  if(up)[].forEach.call(box.querySelectorAll("a"),function(a){a.classList.add("ej-btn")})})}
 (function(){var n=0;function t(){try{ejCard()}catch(e){}if(++n<40)setTimeout(t,300)}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",t);else t()})();
 function j(u){return fetch(u).then(function(r){if(!r.ok)throw 0;return r.json()})}
 j(BASE+"pages.json").then(function(P){
