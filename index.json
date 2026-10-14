@@ -1,0 +1,99 @@
+{
+ "schema": 1,
+ "updated": "2026-10-14",
+ "states": {
+  "AR": {
+   "file": "states/AR.json",
+   "count": 3
+  },
+  "AZ": {
+   "file": "states/AZ.json",
+   "count": 2
+  },
+  "CA": {
+   "file": "states/CA.json",
+   "count": 11
+  },
+  "CO": {
+   "file": "states/CO.json",
+   "count": 2
+  },
+  "DC": {
+   "file": "states/DC.json",
+   "count": 1
+  },
+  "FL": {
+   "file": "states/FL.json",
+   "count": 8
+  },
+  "GA": {
+   "file": "states/GA.json",
+   "count": 55
+  },
+  "ID": {
+   "file": "states/ID.json",
+   "count": 2
+  },
+  "IL": {
+   "file": "states/IL.json",
+   "count": 5
+  },
+  "IN": {
+   "file": "states/IN.json",
+   "count": 4
+  },
+  "KY": {
+   "file": "states/KY.json",
+   "count": 5
+  },
+  "LA": {
+   "file": "states/LA.json",
+   "count": 1
+  },
+  "MD": {
+   "file": "states/MD.json",
+   "count": 3
+  },
+  "MI": {
+   "file": "states/MI.json",
+   "count": 1
+  },
+  "NC": {
+   "file": "states/NC.json",
+   "count": 8
+  },
+  "NV": {
+   "file": "states/NV.json",
+   "count": 1
+  },
+  "NY": {
+   "file": "states/NY.json",
+   "count": 1
+  },
+  "OH": {
+   "file": "states/OH.json",
+   "count": 17
+  },
+  "OK": {
+   "file": "states/OK.json",
+   "count": 8
+  },
+  "TN": {
+   "file": "states/TN.json",
+   "count": 4
+  },
+  "TX": {
+   "file": "states/TX.json",
+   "count": 31
+  },
+  "VA": {
+   "file": "states/VA.json",
+   "count": 8
+  },
+  "WY": {
+   "file": "states/WY.json",
+   "count": 1
+  }
+ },
+ "total": 182
+}

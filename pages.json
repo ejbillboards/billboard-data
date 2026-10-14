@@ -1,0 +1,148 @@
+{
+ "schema": 1,
+ "base": "https://ejbillboards.github.io/billboard-data/",
+ "states": {
+  "alabama-digital-billboards": "AL",
+  "alaska-digital-billboards": "AK",
+  "arizona-digital-billboards": "AZ",
+  "arkansas-digital-billboards": "AR",
+  "california-digital-billboards": "CA",
+  "colorado-digital-billboards": "CO",
+  "connecticut-digital-billboards": "CT",
+  "delaware-digital-billboards": "DE",
+  "florida-digital-billboards": "FL",
+  "georgia-digital-billboards": "GA",
+  "hawaii-digital-billboards": "HI",
+  "idaho-digital-billboards": "ID",
+  "illinois-digital-billboards": "IL",
+  "indiana-digital-billboards": "IN",
+  "iowa-digital-billboards": "IA",
+  "kansas-digital-billboards": "KS",
+  "kentucky-digital-billboards": "KY",
+  "louisiana-digital-billboards": "LA",
+  "maine-digital-billboards": "ME",
+  "maryland-digital-billboards": "MD",
+  "massachusetts-digital-billboards": "MA",
+  "michigan-digital-billboards": "MI",
+  "minnesota-digital-billboards": "MN",
+  "mississippi-digital-billboards": "MS",
+  "missouri-digital-billboards": "MO",
+  "montana-digital-billboards": "MT",
+  "nebraska-digital-billboards": "NE",
+  "nevada-digital-billboards": "NV",
+  "new-hampshire-digital-billboards": "NH",
+  "new-jersey-digital-billboards": "NJ",
+  "new-mexico-digital-billboards": "NM",
+  "new-york-digital-billboards": "NY",
+  "north-carolina-digital-billboards": "NC",
+  "north-dakota-digital-billboards": "ND",
+  "ohio-digital-billboards": "OH",
+  "oklahoma-digital-billboards": "OK",
+  "oregon-digital-billboards": "OR",
+  "pennsylvania-digital-billboards": "PA",
+  "rhode-island-digital-billboards": "RI",
+  "south-carolina-digital-billboards": "SC",
+  "south-dakota-digital-billboards": "SD",
+  "tennessee-digital-billboards": "TN",
+  "texas-digital-billboards": "TX",
+  "utah-digital-billboards": "UT",
+  "vermont-digital-billboards": "VT",
+  "virginia-digital-billboards": "VA",
+  "washington-digital-billboards": "WA",
+  "west-virginia-digital-billboards": "WV",
+  "wisconsin-digital-billboards": "WI",
+  "wyoming-digital-billboards": "WY"
+ },
+ "cities": {
+  "georgia-digital-billboards/atlanta-digital-billboards": [
+   "Atlanta",
+   33.749,
+   -84.388,
+   9.3
+  ],
+  "georgia-digital-billboards/acworth-digital-billboards": [
+   "Acworth",
+   34.0661,
+   -84.6769,
+   10.5
+  ],
+  "georgia-digital-billboards/augusta-digital-billboards": [
+   "Augusta",
+   33.4735,
+   -82.0105,
+   10.5
+  ],
+  "georgia-digital-billboards/barnesville-digital-billboards": [
+   "Barnesville",
+   33.0543,
+   -84.1558,
+   10.5
+  ],
+  "georgia-digital-billboards/cartersville-digital-billboards": [
+   "Cartersville",
+   34.1651,
+   -84.7999,
+   10.5
+  ],
+  "georgia-digital-billboards/conyers-digital-billboards": [
+   "Conyers",
+   33.6676,
+   -84.0177,
+   10.5
+  ],
+  "georgia-digital-billboards/kennesaw-digital-billboards": [
+   "Kennesaw",
+   34.0234,
+   -84.6155,
+   10.5
+  ],
+  "georgia-digital-billboards/macon-digital-billboards": [
+   "Macon",
+   32.8407,
+   -83.6324,
+   10.5
+  ],
+  "georgia-digital-billboards/mcdonough-digital-billboards": [
+   "McDonough",
+   33.4473,
+   -84.1469,
+   10.5
+  ],
+  "georgia-digital-billboards/norcross-digital-billboards": [
+   "Norcross",
+   33.9412,
+   -84.2135,
+   10.5
+  ],
+  "georgia-digital-billboards/smyrna-digital-billboards-bus-shelter-advertising": [
+   "Smyrna",
+   33.8839,
+   -84.5144,
+   10.5
+  ],
+  "georgia-digital-billboards/stockbridge-digital-billboards": [
+   "Stockbridge",
+   33.5443,
+   -84.2338,
+   10.5
+  ],
+  "georgia-digital-billboards/warner-robins-digital-billboards": [
+   "Warner Robins",
+   32.613,
+   -83.6243,
+   10.5
+  ],
+  "maryland-digital-billboards/baltimore-digital-billboards": [
+   "Baltimore",
+   39.2904,
+   -76.6122,
+   11.5
+  ],
+  "maryland-digital-billboards/baltimore-md-digital-billboards": [
+   "Baltimore",
+   39.2904,
+   -76.6122,
+   11.5
+  ]
+ }
+}
