@@ -1,6 +1,6 @@
 /* E&J Billboard Master Planner loader. Squarespace Footer sets window.EJ_MAPBOX_TOKEN then loads this file. */
 (function(){
-var m0=location.pathname.match(/^\/([a-z-]+-digital-billboards)\/p\/([^\/?#]+)/);if(!m0)return;
+var m0=location.pathname.match(/^\/([a-z-]+-digital-billboards)\/p\/([^\/?#]+)/),isP=/^\/[^\/]+\/p\/[^\/?#]+/.test(location.pathname);if(!isP)return;
 var BASE="https://ejbillboards.github.io/billboard-data/",TOKEN=window.EJ_MAPBOX_TOKEN,done=0,C,D;
 function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
 function money(n){return "$"+Number(n).toLocaleString("en-US")}
@@ -51,7 +51,7 @@ function ejCard(){
   if(up)[].forEach.call(box.querySelectorAll("a"),function(a){a.classList.add("ej-btn")})})}
 (function(){var n=0;function t(){try{ejCard()}catch(e){}if(++n<40)setTimeout(t,300)}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",t);else t()})();
 function j(u){return fetch(u).then(function(r){if(!r.ok)throw 0;return r.json()})}
-j(BASE+"pages.json").then(function(P){
+if(m0)j(BASE+"pages.json").then(function(P){
  var st=P.states[m0[1]];if(!st)return;
  return j(BASE+"states/"+st+".json").then(function(S){
   var c=P.cities[m0[1]+"/"+m0[2]];if(!c||!S.boards.length)return;
