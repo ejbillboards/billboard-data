@@ -1,6 +1,6 @@
 /* E&J Billboard Master Planner loader. Squarespace Footer sets window.EJ_MAPBOX_TOKEN then loads this file. */
 (function(){
-var m0=location.pathname.match(/^\/([a-z-]+-digital-billboards)\/p\/([^\/?#]+)/);
+var m0=location.pathname.match(/^\/([a-z0-9-]+)\/p\/([^\/?#]+)/),ms=location.pathname.match(/^\/([a-z-]+-digital-billboards)\/?$/),STATE=0,HEAD="";
 var BASE="https://ejbillboards.github.io/billboard-data/",TOKEN=window.EJ_MAPBOX_TOKEN,done=0,C,D;
 function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
 function money(n){return "$"+Number(n).toLocaleString("en-US")}
@@ -10,17 +10,18 @@ function pop(g){return '<div style="font:14px/1.4 system-ui,sans-serif;width:230
 function load(cb){if(window.mapboxgl)return cb();var l=document.createElement("link");l.rel="stylesheet";l.href="https://api.mapbox.com/mapbox-gl-js/v3.9.4/mapbox-gl.css";document.head.appendChild(l);var s=document.createElement("script");s.src="https://api.mapbox.com/mapbox-gl-js/v3.9.4/mapbox-gl.js";s.onload=cb;document.head.appendChild(s)}
 function dist(g){return Math.pow(g.lat-C[1],2)+Math.pow((g.lon-C[2])*Math.cos(C[1]*Math.PI/180),2)}
 function place(){
- if(done)return true;
+ if(done||document.getElementById("ej-master-planner"))return true;
  var hs=[].slice.call(document.querySelectorAll(".product-description h2")).filter(function(h){return /How to book/i.test(h.textContent)&&h.offsetParent!==null});
- if(!hs.length)return false;
- var h=hs[0],anchor=h.nextElementSibling;while(anchor&&anchor.tagName!=="OL"&&anchor.tagName!=="UL")anchor=anchor.nextElementSibling;
- if(!anchor)anchor=h;
+ var anchor;
+ if(STATE){anchor=document.querySelector('[id^="ej-"][id$="-seo"] > .ej-sec');if(!anchor)return false}
+ else{if(!hs.length)return false;var h=hs[0];anchor=h.nextElementSibling;while(anchor&&anchor.tagName!=="OL"&&anchor.tagName!=="UL")anchor=anchor.nextElementSibling;
+ if(!anchor)anchor=h}
  done=1;
  var w=document.createElement("section");w.id="ej-master-planner";w.className="ej-sec";
- w.innerHTML='<h2 style="margin:0 0 6px">Billboards near '+esc(C[0])+' on the map</h2><p style="margin:0 0 10px;opacity:.8">Tap a pin for photos, size, and starting prices. Pins are approximate. An agent confirms the exact face and availability.</p><div id="ej-map" style="height:420px;border-radius:12px;overflow:hidden;background:#e8ecef"></div><details style="margin:12px 0 0"><summary style="cursor:pointer;font-weight:600;padding:10px 0">See all '+D.length+' billboard locations</summary><ul style="margin:8px 0 0;padding-left:18px;font-size:14px;max-height:360px;overflow:auto">'+D.map(function(g){return "<li>"+esc(title(g))+" — "+esc(g.loc)+" — from "+(g.rate?money(g.rate):"$400")+"+</li>"}).join("")+"</ul></details>";
+ w.innerHTML='<h2 style="margin:0 0 6px">'+esc(HEAD)+'</h2><p style="margin:0 0 10px;opacity:.8">Tap a pin for photos, size, and starting prices. Pins are approximate. An agent confirms the exact face and availability.</p><div id="ej-map" style="height:420px;border-radius:12px;overflow:hidden;background:#e8ecef"></div><details style="margin:12px 0 0"><summary style="cursor:pointer;font-weight:600;padding:10px 0">See all '+D.length+' billboard locations</summary><ul style="margin:8px 0 0;padding-left:18px;font-size:14px;max-height:360px;overflow:auto">'+D.map(function(g){return "<li>"+esc(title(g))+" — "+esc(g.loc)+" — from "+(g.rate?money(g.rate):"$400")+"+</li>"}).join("")+"</ul></details>";
  var ref=anchor.closest(".ej-sec")||anchor;ref.parentNode.insertBefore(w,ref.nextSibling);try{ejCard()}catch(e){}
  load(function(){try{if(!mapboxgl.supported())throw 0;mapboxgl.accessToken=TOKEN;
-  var m=new mapboxgl.Map({container:"ej-map",style:"mapbox://styles/mapbox/light-v11",center:[C[2],C[1]],zoom:C[3],cooperativeGestures:true});
+  var o={container:"ej-map",style:"mapbox://styles/mapbox/light-v11",cooperativeGestures:true};if(STATE){var bb=new mapboxgl.LngLatBounds();D.forEach(function(g){bb.extend([g.lon,g.lat])});o.bounds=bb;o.fitBoundsOptions={padding:40,maxZoom:9}}else{o.center=[C[2],C[1]];o.zoom=C[3]}var m=new mapboxgl.Map(o);
   m.addControl(new mapboxgl.NavigationControl());
   D.forEach(function(g){new mapboxgl.Marker({color:"#c9971c"}).setLngLat([g.lon,g.lat]).setPopup(new mapboxgl.Popup({offset:24,maxWidth:"260px"}).setHTML(pop(g))).addTo(m)});
  }catch(e){document.getElementById("ej-map").innerHTML='<p style="padding:20px">The map could not load. See the list below or call 888-999-3241.</p>'}});
@@ -59,10 +60,13 @@ function ejState(){
   var first=null;kids.forEach(function(k){if(k.tagName==="H2"){cur=mk();c.insertBefore(cur,k);cur.appendChild(k)}else if(k.tagName==="STYLE"||k.tagName==="SCRIPT"){}else if(cur){cur.appendChild(k)}else{pre.push(k)}});
   if(pre.length){var b=mk();c.insertBefore(b,pre[0]);pre.forEach(function(k){b.appendChild(k)})}})}
 function j(u){return fetch(u).then(function(r){if(!r.ok)throw 0;return r.json()})}
-if(m0)j(BASE+"pages.json").then(function(P){
- var st=P.states[m0[1]];if(!st)return;
+var seg=m0?m0[1]:(ms?ms[1]:null);
+if(seg)j(BASE+"pages.json").then(function(P){
+ var st=P.states[seg];if(!st)return;
  return j(BASE+"states/"+st+".json").then(function(S){
-  var c=P.cities[m0[1]+"/"+m0[2]];if(!c||!S.boards.length)return;
-  C=c;D=S.boards.slice().sort(function(a,b){return dist(a)-dist(b)});go()})
+  if(!S.boards.length)return;
+  if(m0){var c=P.cities[m0[1]+"/"+m0[2]];if(!c)return;C=c;HEAD="Billboards near "+c[0]+" on the map";D=S.boards.slice().sort(function(a,b){return dist(a)-dist(b)})}
+  else{STATE=1;C=[0,0,0,0];HEAD="Billboards in "+seg.replace("-digital-billboards","").replace(/-/g," ").replace(/\b\w/g,function(x){return x.toUpperCase()})+" on the map";D=S.boards.slice()}
+  go()})
 }).catch(function(){});
 })();
