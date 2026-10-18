@@ -12,7 +12,7 @@ G=collections.defaultdict(dict)
 for r in rows:
     st=(r[20] or '').replace('.','').strip().upper()
     if not st or not (r[23] and r[24]): continue
-    m=re.search(r'"(https://res\.cloudinary\.com[^"]+)"',str(r[0] or ''))
+    m=re.search(r'"(https://(?:res\.cloudinary\.com|ejbillboards\.github\.io)[^"]+)"',str(r[0] or ''))
     if not m: continue
     if (r[89] or '')=='Rejected': continue
     lat,lon=round(float(r[23]),4),round(float(r[24]),4)
@@ -28,6 +28,8 @@ for st,d in sorted(G.items()):
     for g in d.values():
         ids=sorted(i for i in g["ids"] if i and 'PENDING' not in i) or sorted(g["ids"])
         b.append({"id":ids[0],"faces":len(g["ids"]),"area":g["area"],"city":g["city"],"loc":g["loc"],"types":sorted(g["types"]),"sizes":sorted(g["sizes"]),"rate":g["rate"],"photo":g["photo"],"lat":g["lat"],"lon":g["lon"]})
+    if st=="MX":
+        for x in b: x["intl"]=True
     b.sort(key=lambda x:x["id"])
     json.dump({"schema":1,"state":st,"updated":today,"count":len(b),"boards":b},open(f'states/{st}.json','w'),separators=(',',':'),ensure_ascii=False)
     index["states"][st]={"file":f"states/{st}.json","count":len(b)}
