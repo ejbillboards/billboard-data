@@ -7,7 +7,8 @@ import sys,re,json,datetime,collections,os,openpyxl
 POL="e_improve:outdoor:40,e_vibrance:30,e_sharpen:80,w_900,q_auto,f_auto"
 def polish(u): return u.replace("/image/upload/","/image/upload/%s/"%POL,1)
 ws=openpyxl.load_workbook(sys.argv[1])['Billboards']
-rows=list(ws.iter_rows(values_only=True))[1:]
+allr=list(ws.iter_rows(values_only=True)); hdr=[str(h or '').strip().lower() for h in allr[0]]; rows=allr[1:]
+PUB=hdr.index('publish') if 'publish' in hdr else None  # optional column; blank = publish
 G=collections.defaultdict(dict)
 for r in rows:
     st=(r[20] or '').replace('.','').strip().upper()
@@ -15,6 +16,7 @@ for r in rows:
     m=re.search(r'"(https://(?:res\.cloudinary\.com|ejbillboards\.github\.io)[^"]+)"',str(r[0] or ''))
     if not m: continue
     if (r[89] or '')=='Rejected': continue
+    if PUB is not None and str(r[PUB] or '').strip().upper() in ('N','NO'): continue
     lat,lon=round(float(r[23]),4),round(float(r[24]),4)
     g=G[st].setdefault((lat,lon),{"ids":[],"area":r[25] or r[59] or '',"city":r[59] or '',"loc":r[15] or '',"types":set(),"sizes":set(),"rate":None,"photo":polish(m.group(1)),"lat":lat,"lon":lon})
     g["ids"].append(r[22]); 
