@@ -18,8 +18,11 @@ for r in rows:
     if (r[89] or '')=='Rejected': continue
     if PUB is not None and str(r[PUB] or '').strip().upper() in ('N','NO'): continue
     lat,lon=round(float(r[23]),4),round(float(r[24]),4)
-    g=G[st].setdefault((lat,lon),{"ids":[],"area":r[25] or r[59] or '',"city":r[59] or '',"loc":r[15] or '',"types":set(),"sizes":set(),"rate":None,"photo":polish(m.group(1)),"lat":lat,"lon":lon})
+    g=G[st].setdefault((lat,lon),{"ids":[],"area":r[25] or r[59] or '',"city":r[59] or '',"loc":r[15] or '',"types":set(),"sizes":set(),"rate":None,"photo":polish(m.group(1)),"more":[],"lat":lat,"lon":lon})
     g["ids"].append(r[22]); 
+    pu=polish(m.group(1))
+    if pu!=g["photo"] and pu not in g["more"] and len(g["more"])<3: g["more"].append(pu)
+
     if r[5]: g["types"].add(r[5].replace(' LED',''))
     if r[3]: g["sizes"].add(str(r[3]))
     if isinstance(r[74],(int,float)) and r[74]>0: g["rate"]=max(g["rate"] or 0,int(r[74]))
@@ -29,7 +32,7 @@ for st,d in sorted(G.items()):
     b=[]
     for g in d.values():
         ids=sorted(i for i in g["ids"] if i and 'PENDING' not in i) or sorted(g["ids"])
-        b.append({"id":ids[0],"faces":len(g["ids"]),"area":g["area"],"city":g["city"],"loc":g["loc"],"types":sorted(g["types"]),"sizes":sorted(g["sizes"]),"rate":g["rate"],"photo":g["photo"],"lat":g["lat"],"lon":g["lon"]})
+        b.append({"id":ids[0],"faces":len(g["ids"]),"area":g["area"],"city":g["city"],"loc":g["loc"],"types":sorted(g["types"]),"sizes":sorted(g["sizes"]),"rate":g["rate"],"photo":g["photo"],**({"more":g["more"]} if g["more"] else {}),"lat":g["lat"],"lon":g["lon"]})
     if st=="MX":
         for x in b: x["intl"]=True
     b.sort(key=lambda x:x["id"])
