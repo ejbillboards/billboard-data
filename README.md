@@ -8,6 +8,6 @@ National billboard location data that powers the E&J Billboard Master Planner ma
 - `loader.js`: the one small script pasted into Squarespace
 - `scripts/build.py`: builds the state files from the master sheet export
 
-Schema version 1. Board fields: `id`, `faces`, `area`, `city`, `loc`, `types`, `sizes`, `rate`, `photo`, `lat`, `lon`.
+Schema version 1. Board fields: `id`, `faces`, `area`, `city`, `loc`, `types`, `sizes`, `price` (external starting prices from pricing.json; internal sheet rates are never published), `photo`, `lat`, `lon`.
 Never published: vendor names, internal IDs, rights notes, costs.
 Pins are approximate. An E&J agent confirms the exact face and availability.
