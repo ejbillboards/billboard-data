@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "updated": "2026-10-18",
+ "updated": "2026-10-21",
  "states": {
   "AR": {
    "file": "states/AR.json",
@@ -12,11 +12,15 @@
   },
   "CA": {
    "file": "states/CA.json",
-   "count": 11
+   "count": 13
   },
   "CO": {
    "file": "states/CO.json",
-   "count": 2
+   "count": 6
+  },
+  "CT": {
+   "file": "states/CT.json",
+   "count": 1
   },
   "DC": {
    "file": "states/DC.json",
@@ -24,11 +28,11 @@
   },
   "FL": {
    "file": "states/FL.json",
-   "count": 8
+   "count": 12
   },
   "GA": {
    "file": "states/GA.json",
-   "count": 55
+   "count": 81
   },
   "ID": {
    "file": "states/ID.json",
@@ -40,15 +44,19 @@
   },
   "IN": {
    "file": "states/IN.json",
-   "count": 4
+   "count": 6
   },
   "KY": {
    "file": "states/KY.json",
-   "count": 5
+   "count": 8
   },
   "LA": {
    "file": "states/LA.json",
    "count": 1
+  },
+  "MA": {
+   "file": "states/MA.json",
+   "count": 2
   },
   "MD": {
    "file": "states/MD.json",
@@ -56,15 +64,23 @@
   },
   "MI": {
    "file": "states/MI.json",
-   "count": 1
+   "count": 3
+  },
+  "MT": {
+   "file": "states/MT.json",
+   "count": 2
   },
   "NC": {
    "file": "states/NC.json",
    "count": 8
   },
+  "NJ": {
+   "file": "states/NJ.json",
+   "count": 3
+  },
   "NV": {
    "file": "states/NV.json",
-   "count": 1
+   "count": 5
   },
   "NY": {
    "file": "states/NY.json",
@@ -78,26 +94,34 @@
    "file": "states/OK.json",
    "count": 8
   },
+  "OR": {
+   "file": "states/OR.json",
+   "count": 4
+  },
+  "PA": {
+   "file": "states/PA.json",
+   "count": 2
+  },
   "TN": {
    "file": "states/TN.json",
-   "count": 4
+   "count": 7
   },
   "TX": {
    "file": "states/TX.json",
-   "count": 31
+   "count": 33
+  },
+  "UT": {
+   "file": "states/UT.json",
+   "count": 3
   },
   "VA": {
    "file": "states/VA.json",
-   "count": 8
+   "count": 14
   },
   "WY": {
    "file": "states/WY.json",
    "count": 1
-  },
-  "MX": {
-   "file": "states/MX.json",
-   "count": 5
   }
  },
- "total": 187
+ "total": 257
 }
