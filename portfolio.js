@@ -99,7 +99,8 @@ function place(){
   R.innerHTML="<style>"+CSS+"</style>"+b.html;
   var nav=R.getElementById("nav");
   function setTop(){var h=document.querySelector("header#header, header");var t=0;if(h){var p=getComputedStyle(h).position;if(p==="fixed"||p==="sticky")t=h.getBoundingClientRect().height}nav.style.top=t+"px"}
-  setTop();window.addEventListener("resize",setTop);window.addEventListener("scroll",setTop,{passive:true});
+  function pad(){var h=document.querySelector("header#header, header");if(h&&getComputedStyle(h).position==="absolute"){host.style.paddingTop=Math.round(h.getBoundingClientRect().bottom+window.scrollY-host.getBoundingClientRect().top-window.scrollY+host.offsetTop*0)+"px";host.style.background="#0b0b0b"}}
+  setTop();pad();setTimeout(pad,800);window.addEventListener("resize",function(){host.style.paddingTop="";pad()});window.addEventListener("resize",setTop);window.addEventListener("scroll",setTop,{passive:true});
   [].forEach.call(R.querySelectorAll(".nav a"),function(a){a.addEventListener("click",function(e){e.preventDefault();var s=R.getElementById(a.dataset.id);if(s)s.scrollIntoView({behavior:"smooth",block:"start"})})});
   if(window.IntersectionObserver){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){[].forEach.call(R.querySelectorAll(".nav a"),function(a){a.classList.toggle("on",a.dataset.id===e.target.id)})}})},{rootMargin:"-30% 0px -60% 0px"});[].forEach.call(R.querySelectorAll(".sec"),function(s){io.observe(s)})}
   var lb=R.getElementById("lb"),img=R.getElementById("lbimg"),cap=R.getElementById("lbc"),cur=0,last=null;
