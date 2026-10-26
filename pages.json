@@ -551,16 +551,16 @@
    -121.2265,
    10.5
   ],
-  "california-digital-billboards/stockton-digital-billboards": [
-   "Stockton",
-   37.9908,
-   -121.2521,
-   10.5
-  ],
   "california-digital-billboards/delhi-digital-billboards": [
    "Delhi",
    37.4458,
    -120.7942,
+   10.5
+  ],
+  "california-digital-billboards/stockton-ca-digital-billboards": [
+   "Stockton",
+   37.9908,
+   -121.2521,
    10.5
   ]
  }
