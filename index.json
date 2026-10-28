@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "updated": "2026-10-26",
+ "updated": "2026-10-28",
  "states": {
   "AR": {
    "file": "states/AR.json",
@@ -76,7 +76,7 @@
   },
   "NJ": {
    "file": "states/NJ.json",
-   "count": 3
+   "count": 4
   },
   "NV": {
    "file": "states/NV.json",
@@ -123,5 +123,5 @@
    "count": 1
   }
  },
- "total": 267
+ "total": 268
 }
