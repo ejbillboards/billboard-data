@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "updated": "2026-10-28",
+ "updated": "2026-10-29",
  "states": {
   "AR": {
    "file": "states/AR.json",
@@ -32,7 +32,7 @@
   },
   "GA": {
    "file": "states/GA.json",
-   "count": 81
+   "count": 83
   },
   "ID": {
    "file": "states/ID.json",
@@ -123,5 +123,5 @@
    "count": 1
   }
  },
- "total": 268
+ "total": 270
 }
